@@ -52,6 +52,7 @@ export default async function ListOfFiles() {
 						</svg>
 						Download
 					</a>
+					<p> subido el: {file.createdAt}</p>
 				</li>
 			))}
 		</ul>
