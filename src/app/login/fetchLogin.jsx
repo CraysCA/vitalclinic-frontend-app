@@ -7,6 +7,7 @@ export const fetchLogin = async credentials => {
 			Authorization:
 				'Basic ' + Buffer.from(email + ':' + password).toString('base64'),
 		},
+		cache: 'no-store',
 	})
 	const data = await response.json()
 

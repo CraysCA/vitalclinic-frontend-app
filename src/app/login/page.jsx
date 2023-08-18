@@ -39,6 +39,13 @@ export default function Login() {
 		e.preventDefault()
 		const token = await fetchLogin(credentials)
 		if (token) {
+			let cookie = `auth_token=${token};`
+			cookie += 'path=/;'
+			cookie += 'max-age=2592000;'
+			document.cookie = cookie
+
+			//remove cookie
+			//document.cookie = `auth_token=; path=/; max-age=0`
 			const userData = parseJwt(token)
 			setUser(userData)
 		} else {
