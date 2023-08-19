@@ -1,14 +1,12 @@
 'use client'
 
-import { ToastContainer, toast } from 'react-toastify'
+import { Toaster, toast } from 'sonner'
 import 'react-toastify/dist/ReactToastify.css'
 
 import { useState } from 'react'
 import { fetchLogin } from './fetchLogin'
 
 export default function Login() {
-	const notify = (text, style) => toast.error(text, style)
-
 	const parseJwt = token => {
 		const base64Url = token.split('.')[1]
 		const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
@@ -49,16 +47,7 @@ export default function Login() {
 			const userData = parseJwt(token)
 			setUser(userData)
 		} else {
-			notify('Correo o contraseña incorrectos', {
-				position: 'bottom-right',
-				autoClose: 5000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				theme: 'light',
-			})
+			toast.error('Correo o contraseña incorrectos')
 		}
 	}
 
@@ -136,18 +125,7 @@ export default function Login() {
 					</p> */}
 				</div>
 			</div>
-			<ToastContainer
-				position="bottom-right"
-				autoClose={5000}
-				hideProgressBar={false}
-				newestOnTop={false}
-				closeOnClick
-				rtl={false}
-				pauseOnFocusLoss
-				draggable
-				pauseOnHover
-				theme="light"
-			/>
+			<Toaster />
 		</main>
 	)
 }
