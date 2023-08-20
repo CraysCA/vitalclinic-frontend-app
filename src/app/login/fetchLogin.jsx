@@ -1,6 +1,6 @@
 export const fetchLogin = async credentials => {
 	const { email, password } = credentials
-	const url = 'https://vitalclinic-backend-81os-dev.fl0.io/auth/login'
+	const url = `${process.env.apiUrl}/auth/login`
 	const response = await fetch(url, {
 		method: 'POST',
 		headers: {

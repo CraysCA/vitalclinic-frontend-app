@@ -1,7 +1,7 @@
 import CreateUser from './CreateUser'
 const fetchUsers = async () => {
-	const url = 'https://vitalclinic-backend-81os-dev.fl0.io/users/'
-	return await fetch(url, {
+	const url = `${process.env.apiUrl}/users/`
+	const response = await fetch(url, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
@@ -14,8 +14,8 @@ const fetchUsers = async () => {
 			revalidate: 60,
 		},
 	})
-		.then(response => response.json())
-		.then(data => data.user)
+	const data = await response.json()
+	return data.success ? data.data : []
 }
 
 function checkType(user) {

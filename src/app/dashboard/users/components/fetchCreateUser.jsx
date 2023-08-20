@@ -1,5 +1,5 @@
 export const fetchCreateUser = async credentials => {
-	const url = 'https://vitalclinic-backend-81os-dev.fl0.io/users/'
+	const url = `${process.env.apiUrl}/users/`
 	const response = await fetch(url, {
 		method: 'POST',
 		headers: {
@@ -13,7 +13,6 @@ export const fetchCreateUser = async credentials => {
 		cache: 'no-store',
 	})
 	const data = await response.json()
-	console.log(data)
 
 	return data.success
 }

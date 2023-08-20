@@ -1,7 +1,7 @@
 'use client'
 import { Toaster, toast } from 'sonner'
 import { useState } from 'react'
-import { fetchCreateUser } from './fetchCreateUser'
+import { postCreateUser } from '@/app/api/post-create-user'
 export default function CreateUser() {
 	const [credentials, setCredentials] = useState({})
 
@@ -10,7 +10,7 @@ export default function CreateUser() {
 	}
 	const handlerSubmit = async e => {
 		e.preventDefault()
-		const isCreated = await fetchCreateUser(credentials)
+		const isCreated = await postCreateUser(credentials)
 
 		if (!isCreated) {
 			toast.error('No se pudo crear el usuario')
@@ -217,11 +217,11 @@ export default function CreateUser() {
 							</div>
 						</div>
 					</div>
-					<Toaster />
 				</div>
 			) : (
 				''
 			)}
+			<Toaster />
 		</section>
 	)
 }
