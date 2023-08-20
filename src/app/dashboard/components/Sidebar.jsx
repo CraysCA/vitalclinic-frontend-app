@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-async-client-component */
 'use client'
 import Link from 'next/link'
-import { useState } from 'react'
 
 import { HomeIcon, UsersIcon, DocumentTextIcon } from '@heroicons/react/outline'
 import { useSelectedLayoutSegment } from 'next/navigation'
@@ -10,29 +9,55 @@ function classNames(...classes) {
 	return classes.filter(Boolean).join(' ')
 }
 
-export default function Sidebar() {
+export default function Sidebar(props) {
+	const { name, lastname, email, type } = props.user
 	const segment = useSelectedLayoutSegment()
+	console.log(type)
 
-	const sidebarOptions = [
-		{
-			name: 'Panel Principal',
-			href: '/dashboard',
-			Icon: HomeIcon,
-			current: !segment ? true : false,
-		},
-		{
-			name: 'Usuarios',
-			href: '/dashboard/users',
-			Icon: UsersIcon,
-			current: `/${segment}` === '/users' ? true : false,
-		},
-		{
-			name: 'Mis Archivos',
-			href: '/dashboard/files',
-			Icon: DocumentTextIcon,
-			current: `/${segment}` === '/files' ? true : false,
-		},
-	]
+	let sidebarOptions = []
+
+	if (type == 1) {
+		sidebarOptions = [
+			{
+				name: 'Panel Principal',
+				href: '/dashboard',
+				Icon: HomeIcon,
+				typeAllow: [1, 2, 3],
+				current: !segment ? true : false,
+			},
+			{
+				name: 'Usuarios',
+				href: '/dashboard/users',
+				Icon: UsersIcon,
+				typeAllow: [1],
+				current: `/${segment}` === '/users' ? true : false,
+			},
+			{
+				name: 'Mis Archivos',
+				href: '/dashboard/files',
+				Icon: DocumentTextIcon,
+				typeAllow: [1, 2, 3],
+				current: `/${segment}` === '/files' ? true : false,
+			},
+		]
+	} else if (type == 2 || type == 3) {
+		sidebarOptions = [
+			{
+				name: 'Panel Principal',
+				href: '/dashboard',
+				Icon: HomeIcon,
+
+				current: !segment ? true : false,
+			},
+			{
+				name: 'Mis Archivos',
+				href: '/dashboard/files',
+				Icon: DocumentTextIcon,
+
+				current: `/${segment}` === '/files' ? true : false,
+			},
+		]
+	}
 
 	return (
 		<div className="p-3">
@@ -72,7 +97,14 @@ export default function Sidebar() {
 									))}
 								</ul>
 							</li>
+							<li>
+								{name} {lastname}
+								<p>{email}</p>
+							</li>
 						</ul>
+						<p className=" bg-black text-white p-6">
+							<Link href="/logout">Cerrar Sesión</Link>
+						</p>
 					</nav>
 				</div>
 			</div>

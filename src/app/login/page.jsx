@@ -1,33 +1,22 @@
 'use client'
 
 import { Toaster, toast } from 'sonner'
-import 'react-toastify/dist/ReactToastify.css'
+import { useRouter } from 'next/navigation'
+import { useAuthContext } from '../../../contexts/authContext'
 
 import { useState } from 'react'
 import { fetchLogin } from './fetchLogin'
 
 export default function Login() {
-	const parseJwt = token => {
-		const base64Url = token.split('.')[1]
-		const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
-		const payload = decodeURIComponent(
-			window
-				.atob(base64)
-				.split('')
-				.map(function (c) {
-					return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
-				})
-				.join(''),
-		)
-
-		return JSON.parse(payload)
-	}
-
 	const [credentials, setCredentials] = useState({
 		email: '',
 		password: '',
 	})
-	const [user, setUser] = useState(null)
+
+	const router = useRouter()
+	const { login, isLoggedIn } = useAuthContext()
+
+	if (isLoggedIn) return router.push('/dashboard')
 
 	const handlerChange = e => {
 		setCredentials({ ...credentials, [e.target.name]: e.target.value })
@@ -37,15 +26,8 @@ export default function Login() {
 		e.preventDefault()
 		const token = await fetchLogin(credentials)
 		if (token) {
-			let cookie = `auth_token=${token};`
-			cookie += 'path=/;'
-			cookie += 'max-age=2592000;'
-			document.cookie = cookie
-
-			//remove cookie
-			//document.cookie = `auth_token=; path=/; max-age=0`
-			const userData = parseJwt(token)
-			setUser(userData)
+			login(token)
+			return router.push('/dashboard')
 		} else {
 			toast.error('Correo o contraseña incorrectos')
 		}

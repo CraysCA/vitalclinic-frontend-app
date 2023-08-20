@@ -1,13 +1,14 @@
 'use client'
 import { Toaster, toast } from 'sonner'
 import { postUploadFile } from '@/app/api/post-upload-file'
-export default function UploadFile() {
+export default function UploadFile(props) {
+	const { user, authToken } = props.userData
 	const AllowedTypes = ['xls', 'xlsx', 'xlsm', 'xlsb', 'xltx']
 	const handlerChange = async e => {
 		const [filename, type] = e.target.files[0].name.toLowerCase().split('.')
 
 		if (AllowedTypes.includes(type)) {
-			toast.promise(postUploadFile(e), {
+			toast.promise(postUploadFile(e, user, authToken), {
 				loading: 'Subiendo archivo',
 				success: 'Archivo subido satisfactoriamente',
 				error: 'Error al subir el archivo',

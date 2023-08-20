@@ -1,0 +1,16 @@
+'use client'
+
+import { useEffect } from 'react'
+import { useAuthContext } from '../../../contexts/authContext'
+import { useRouter } from 'next/navigation'
+
+export default function Page() {
+	const { logout } = useAuthContext()
+	const router = useRouter()
+
+	useEffect(() => {
+		logout()
+	})
+
+	return router.push('/login')
+}
