@@ -10,9 +10,8 @@ function classNames(...classes) {
 }
 
 export default function Sidebar(props) {
-	const { name, lastname, email, type } = props.user
+	const { type } = props.user
 	const segment = useSelectedLayoutSegment()
-	console.log(type)
 
 	let sidebarOptions = []
 
@@ -60,9 +59,9 @@ export default function Sidebar(props) {
 	}
 
 	return (
-		<div className="p-3">
-			<div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-72 lg:flex-col">
-				<div className="flex grow flex-col gapy-y-5 overflow-y-auto gb-white px-8 pb-4 border-r-2">
+		<div>
+			<div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-72 lg:flex-col z-50">
+				<div className="flex grow flex-col gapy-y-5 overflow-y-auto gb-white px-8 pb-4 shadow-md mr-8">
 					<div className="flex h-16 shrink-0 items-center justify-between">
 						<h1 className="text-2xl font-bold text-dark-blue">
 							VITAL<span className=" text-red-500">CLINIC</span>
@@ -97,14 +96,7 @@ export default function Sidebar(props) {
 									))}
 								</ul>
 							</li>
-							<li>
-								{name} {lastname}
-								<p>{email}</p>
-							</li>
 						</ul>
-						<p className=" bg-black text-white p-6">
-							<Link href="/logout">Cerrar Sesión</Link>
-						</p>
 					</nav>
 				</div>
 			</div>

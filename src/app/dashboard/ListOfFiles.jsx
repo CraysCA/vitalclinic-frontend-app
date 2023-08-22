@@ -1,4 +1,3 @@
-'use client'
 import { getFiles } from '../api/get-files'
 
 const parseDate = date => {
@@ -6,8 +5,8 @@ const parseDate = date => {
 	return parseDate
 }
 
-const files = await getFiles({ params: {} })
 export default async function ListOfFiles() {
+	const files = await getFiles({ params: {} })
 	return (
 		<div className="relative overflow-x-auto shadow-md sm:rounded-lg p-4">
 			<div className="flex items-center justify-between pb-4 ">
