@@ -10,7 +10,7 @@ function classNames(...classes) {
 }
 
 export default function Sidebar(props) {
-	const { type } = props.user
+	const type = 1
 	const segment = useSelectedLayoutSegment()
 
 	let sidebarOptions = []
@@ -21,21 +21,18 @@ export default function Sidebar(props) {
 				name: 'Panel Principal',
 				href: '/dashboard',
 				Icon: HomeIcon,
-				typeAllow: [1, 2, 3],
 				current: !segment ? true : false,
 			},
 			{
 				name: 'Usuarios',
 				href: '/dashboard/users',
 				Icon: UsersIcon,
-				typeAllow: [1],
 				current: `/${segment}` === '/users' ? true : false,
 			},
 			{
 				name: 'Mis Archivos',
 				href: '/dashboard/files',
 				Icon: DocumentTextIcon,
-				typeAllow: [1, 2, 3],
 				current: `/${segment}` === '/files' ? true : false,
 			},
 		]
@@ -97,6 +94,18 @@ export default function Sidebar(props) {
 								</ul>
 							</li>
 						</ul>
+						<div className="flex flex-col justify-center items-center mr-12 cursor-pointer hover:bg-slate-200 py-1 px-3 rounded-lg ">
+							<div className="flex flex-row gap-2 items-center">
+								<div className="w-8 h-8 rounded-full bg-slate-600"></div>
+								name lastname
+							</div>
+
+							<Link
+								className=" border-t-2 rounded-md py-2 hover:bg-white "
+								href="/logout">
+								Cerrar Sesión
+							</Link>
+						</div>
 					</nav>
 				</div>
 			</div>

@@ -2,7 +2,7 @@
 
 import { Toaster, toast } from 'sonner'
 import { useRouter } from 'next/navigation'
-import { useAuthContext } from '../../../contexts/authContext'
+import { useAuthContext } from '@/contexts/authContext'
 
 import { useState } from 'react'
 import { fetchLogin } from './fetchLogin'

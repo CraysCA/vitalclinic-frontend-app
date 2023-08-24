@@ -1,5 +1,4 @@
 import { getFiles } from '../api/get-files'
-
 const parseDate = date => {
 	const [parseDate, rest] = new Date(date).toLocaleString().split(',')
 	return parseDate

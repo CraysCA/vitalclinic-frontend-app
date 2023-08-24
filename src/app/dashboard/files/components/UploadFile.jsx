@@ -1,8 +1,8 @@
 'use client'
 import { Toaster, toast } from 'sonner'
 import { postUploadFile } from '@/app/api/post-upload-file'
-export default function UploadFile(props) {
-	const { user, authToken } = props.userData
+export default function UploadFile() {
+	//const { user, authToken } = props.userData
 	const AllowedTypes = ['xls', 'xlsx', 'xlsm', 'xlsb', 'xltx']
 	const handlerChange = async e => {
 		const [filename, type] = e.target.files[0].name.toLowerCase().split('.')
